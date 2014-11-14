@@ -13,10 +13,6 @@ RUN wget http://www.xmailserver.org/xmail-1.27.tar.gz && \
 	ls bin/ | grep -v ".o" | xargs -I{} cp bin/{} /var/MailRoot/bin/ && \
 	chmod 700 /var/MailRoot/
 
-ADD dst/ssl/server.key /root/
-ADD dst/ssl/server.cert /root/
-ADD dst/ssl/ssl.key /root/
-ADD dst/ssl/ssl.csr /root/
 ADD files/execme1st.sh /root/
 ADD files/domainadd.sh /root/
 ADD files/useradd.sh /root/

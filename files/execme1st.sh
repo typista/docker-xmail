@@ -1,6 +1,6 @@
 #!/bin/sh
 if [ "$2" = "" ];then
-	echo "Please enter MASTER_DOMAIN and SUB_DOMAIN"
+	echo "Please enter MASTER_DOMAIN and SUB_DOMAIN [and SSL_SELF_SIGNED]"
 	exit
 fi
 export XMAILADMIN=xmailmaster
@@ -14,16 +14,30 @@ DOMAIN_MASTER=$1
 DOMAIN_SUB=$2
 DOMAIN_MAIL=$DOMAIN_SUB.$DOMAIN_MASTER
 
-cd /var/MailRoot/
 
-for SSL in server.key server.cert ssl.key ssl.csr
+for SSL in server.key server.cert ssl.csr
 do
     SSL=/root/`echo $SSL`
+    echo $SSL
     if [ -f $SSL ];then
-        echo $SSL
         mv $SSL /var/MailRoot/
+    else
+	if [ "$3" != "SSL_SELF_SIGNED" ];then
+		echo "If you want to continue by self-signed ssl."
+		echo "Please specify the 3rd parameter \"SSL_SELF_SIGNED\""
+		exit
+	fi
     fi
 done
+
+cd /var/MailRoot/
+if [ ! -f server.cert ];then
+        openssl genrsa -des3 > ssl.key
+        openssl rsa -in ssl.key -out server.key
+        openssl req -new -key server.key -out ssl.csr
+        openssl x509 -req -days 3650 -in ssl.csr -signkey server.key -out server.cert
+fi
+
 
 IS_INIT_CTRL_ACCOUNTS_TAB=`grep $XMAILADMIN ctrlaccounts.tab | wc -l`
 if [ $IS_INIT_CTRL_ACCOUNTS_TAB = 0 ];then
