@@ -91,6 +91,8 @@ if [ $IS_XMAIL = 0 ];then
 	/etc/init.d/xmail start
 fi
 
+echo "Please wait ...(5 seconds)"
+sleep 5
 
 #ドメイン追加
 echo domain:$DOMAIN_MASTER
