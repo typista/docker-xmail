@@ -14,7 +14,7 @@ else
 	if [ "$2" != "" ];then
     		IMAGE=$IMAGE:$2
 	fi
-	docker run -d --privileged  --name="$__FQDN__" --hostname="$__HOSTNAME__" \
+	docker run -d --privileged --restart=always --name="$__FQDN__" --hostname="$__HOSTNAME__" \
 		-p 25:25 \
 		-p 465:465 \
 		-p 587:587 \
