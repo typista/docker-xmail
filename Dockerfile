@@ -16,6 +16,7 @@ RUN wget http://www.xmailserver.org/xmail-1.27.tar.gz && \
 ADD files/execme1st.sh /root/
 ADD files/domainadd.sh /root/
 ADD files/useradd.sh /root/
+ADD files/changepassword.sh /root/
 ADD files/services.sh /etc/services.sh
 RUN chmod +x /etc/services.sh
 ENTRYPOINT /etc/services.sh
