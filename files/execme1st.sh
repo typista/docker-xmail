@@ -32,7 +32,7 @@ done
 
 cd /var/MailRoot/
 if [ ! -f server.cert ];then
-        openssl genrsa -des3 > ssl.key
+        openssl genrsa -sha256 > ssl.key
         openssl rsa -in ssl.key -out server.key
         openssl req -new -key server.key -out ssl.csr
         openssl x509 -req -days 3650 -in ssl.csr -signkey server.key -out server.cert
@@ -85,14 +85,8 @@ if [ $IS_INIT_CTRL_IPMAP_TAB != 0 ];then
 	echo -e "\"127.0.0.0\"\\t\"255.255.255.0\"\\t\"ALLOW\"\\t2" >> ctrl.ipmap.tab
 fi
 
-IS_XMAIL=`ps aux | grep XMail | grep -v "grep XMail" | wc -l`
-if [ $IS_XMAIL = 0 ];then
-	chmod +x /etc/init.d/xmail
-	/etc/init.d/xmail start
-fi
-
-echo "Please wait ...(5 seconds)"
-sleep 5
+chmod +x /root/startXMail.sh
+/root/startXMail.sh
 
 #ドメイン追加
 echo domain:$DOMAIN_MASTER

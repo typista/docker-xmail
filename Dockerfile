@@ -14,6 +14,8 @@ RUN wget http://www.xmailserver.org/xmail-1.27.tar.gz && \
 	chmod 700 /var/MailRoot/
 
 ADD files/execme1st.sh /root/
+ADD files/startXMail.sh /root/
+ADD files/crontab.txt /root/
 ADD files/domainadd.sh /root/
 ADD files/useradd.sh /root/
 ADD files/changepassword.sh /root/
