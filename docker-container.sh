@@ -8,6 +8,7 @@ else
 	FULLPATH=$(cd `dirname $0`; pwd)/`basename $0`
 	DIR=`dirname $FULLPATH`
 	REPO=`basename $DIR`
+	REPO=`echo $REPO | sed -r "s/docker\-//g"`
 	IMAGE=$USER/$REPO
 	HOST_IP=`ifconfig eth0 | awk '/inet /{print $2}' | sed -r "s/\./-/g"`
 	__HOSTNAME__=${__HOSTNAME__}_$HOST_IP
