@@ -5,6 +5,7 @@ if [ "$1" = "" ];then
 else
 	__FQDN__=$1
 	__HOSTNAME__=`echo $__FQDN__ | sed -r "s/\./_/g"`
+	CONTAINER=$__HOSTNAME__
 	FULLPATH=$(cd `dirname $0`; pwd)/`basename $0`
 	DIR=`dirname $FULLPATH`
 	REPO=`basename $DIR`
@@ -30,15 +31,15 @@ else
 		mkdir -p $DIR_CONTAINER
 	fi
 
-        BOOT=./container/docker-boot-$__HOSTNAME__.sh
-        BOOT_OFF=./container/docker-boot-off-$__HOSTNAME__.sh
-        REMOVE=./container/docker-remove-$__HOSTNAME__.sh
-        echo "./docker-boot.sh $__FQDN__" > $BOOT
-        echo "./docker-boot-off.sh $__FQDN__" > $BOOT_OFF
-        echo "docker rm -f $__FQDN__" > $REMOVE
-        echo "sudo rm -rf /var/www/$__HOSTNAME__" >> $REMOVE
-        chmod +x $BOOT
-        chmod +x $BOOT_OFF
-        chmod +x $REMOVE
-        $BOOT
+    BOOT=./container/docker-boot-$CONTAINER.sh
+    BOOT_OFF=./container/docker-boot-off-$CONTAINER.sh
+    REMOVE=./container/docker-remove-$CONTAINER.sh
+    echo "./docker-boot.sh $__FQDN__" > $BOOT
+    echo "./docker-boot-off.sh $__FQDN__" > $BOOT_OFF
+    echo "docker rm -f $__FQDN__" > $REMOVE
+    echo "sudo rm -rf /var/www/$CONTAINER" >> $REMOVE
+    chmod +x $BOOT
+    chmod +x $BOOT_OFF
+    chmod +x $REMOVE
+    $BOOT
 fi
