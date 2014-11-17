@@ -35,7 +35,7 @@ done
 cd ~/export/MailRoot/
 if [ ! -f server.cert ];then
 	if [ "$3" = "SSL_SELF_SIGNED" ];then
-		openssl genrsa -sha256 > ssl.key
+		openssl genrsa 2048 > ssl.key
 		openssl rsa -in ssl.key -out server.key
 		openssl req -new -key server.key -out ssl.csr
 		openssl x509 -req -days 3650 -in ssl.csr -signkey server.key -out server.cert
