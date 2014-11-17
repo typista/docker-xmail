@@ -3,12 +3,20 @@ if [ "$2" = "" ];then
 	echo "Please enter MASTER_DOMAIN and SUB_DOMAIN [and SSL_SELF_SIGNED]"
 	exit
 fi
+XMAIL=/var/MailRoot
+if [ ! -L $XMAIL ];then
+	if [ ! -d ~/export/MailRoot ];then
+		mv $XMAIL ~/export/
+	else
+		mv $XMAIL $XMAIL.org
+	fi
+	ln -s ~/export/MailRoot $XMAIL
+fi
 export XMAILADMIN=xmailmaster
 export XMAILPASS="stayfoo1ish"
 
 USER=info
 PASSWORD=wysiwyg
-
 
 DOMAIN_MASTER=$1
 DOMAIN_SUB=$2
@@ -17,25 +25,25 @@ DOMAIN_MAIL=$DOMAIN_SUB.$DOMAIN_MASTER
 
 for SSL in server.key server.cert ssl.csr
 do
-    SSL=/root/`echo $SSL`
+    SSL=/root/export/`echo $SSL`
     echo $SSL
     if [ -f $SSL ];then
-        mv $SSL /var/MailRoot/
-    else
-	if [ "$3" != "SSL_SELF_SIGNED" ];then
+        mv $SSL ~/export/MailRoot/
+    fi
+done
+
+cd ~/export/MailRoot/
+if [ ! -f server.cert ];then
+	if [ "$3" = "SSL_SELF_SIGNED" ];then
+		openssl genrsa -sha256 > ssl.key
+		openssl rsa -in ssl.key -out server.key
+		openssl req -new -key server.key -out ssl.csr
+		openssl x509 -req -days 3650 -in ssl.csr -signkey server.key -out server.cert
+	else
 		echo "If you want to continue by self-signed ssl."
 		echo "Please specify the 3rd parameter \"SSL_SELF_SIGNED\""
 		exit
 	fi
-    fi
-done
-
-cd /var/MailRoot/
-if [ ! -f server.cert ];then
-        openssl genrsa -sha256 > ssl.key
-        openssl rsa -in ssl.key -out server.key
-        openssl req -new -key server.key -out ssl.csr
-        openssl x509 -req -days 3650 -in ssl.csr -signkey server.key -out server.cert
 fi
 
 

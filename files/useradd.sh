@@ -7,6 +7,10 @@ DOMAIN_MASTER=$1
 USER=$2
 PASSWORD=$3
 
-#ユーザ追加
-bin/CtrlClnt -s localhost -u $XMAILADMIN -p $XMAILPASS useradd $DOMAIN_MASTER $USER $PASSWORD U
+MAIL_TAB=/var/MailRoot/mailusers.tab
+IS_EXIST=`cat $MAIL_TAB | grep '"'$DOMAIN_MASTER'"' | grep '"'$USER'"' | wc -l`
+if [ "$IS_EXIST" = "" -o $IS_EXIST = 0 ];then
+	#ユーザ追加
+	/var/MailRoot/bin/CtrlClnt -s localhost -u $XMAILADMIN -p $XMAILPASS useradd $DOMAIN_MASTER $USER $PASSWORD U
+fi
 

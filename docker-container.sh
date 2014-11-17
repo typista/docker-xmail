@@ -24,6 +24,7 @@ else
 		-p 995:995 \
 		-p 143:143 \
 		-p 993:993 \
+		-v ${PWD}/xmail-data:/root/export \
  		$IMAGE
 
 	DIR_CONTAINER=dst/$__FQDN__

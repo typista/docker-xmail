@@ -21,5 +21,6 @@ ADD files/useradd.sh /root/
 ADD files/changepassword.sh /root/
 ADD files/services.sh /etc/services.sh
 RUN chmod +x /etc/services.sh
+VOLUME /root/export
 ENTRYPOINT /etc/services.sh
 
