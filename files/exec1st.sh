@@ -93,15 +93,15 @@ if [ $IS_INIT_CTRL_IPMAP_TAB != 0 ];then
 	echo -e "\"127.0.0.0\"\\t\"255.255.255.0\"\\t\"ALLOW\"\\t2" >> ctrl.ipmap.tab
 fi
 
-chmod +x /root/startXMail.sh
-/root/startXMail.sh
+chmod +x /root/export/startXMail.sh
+/root/export/startXMail.sh
 
 #ドメイン追加
 echo domain:$DOMAIN_MASTER
-sh ~/domainadd.sh $DOMAIN_MASTER
+sh /root/export/domainadd.sh $DOMAIN_MASTER
 
 #ユーザ追加
 echo user:$USER
 echo password:$PASSWORD
-sh ~/useradd.sh $DOMAIN_MASTER $USER $PASSWORD
+sh /root/export/useradd.sh $DOMAIN_MASTER $USER $PASSWORD
 
