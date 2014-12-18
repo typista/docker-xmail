@@ -1,8 +1,7 @@
 #http://qiita.com/hnakamur/items/0b72590136cece29faee
 FROM typista/base
 #FROM typista/base:0.4
-RUN wget https://raw.githubusercontent.com/typista/docker-xmail/master/files/exec1st.sh -O /root/exec1st.sh && \
-	wget https://raw.githubusercontent.com/typista/docker-xmail/master/files/entrypoint.sh -O /etc/entrypoint.sh && \
+RUN wget https://raw.githubusercontent.com/typista/docker-xmail/master/files/entrypoint.sh -O /etc/entrypoint.sh && \
 	chmod +x /etc/entrypoint.sh && \
 	yum update -y && \
 	wget http://www.xmailserver.org/xmail-1.27.tar.gz && \
