@@ -1,19 +1,21 @@
 #!/bin/bash
 REPO=docker-xmail
 URL=https://raw.githubusercontent.com/typista/$REPO/master/files
-LOCALTIME=/etc/localtime
-if [ ! -L $LOCALTIME ]; then
-    rm $LOCALTIME
-    ln -s /usr/share/zoneinfo/Asia/Tokyo $LOCALTIME
-fi
-EXEC1ST=/root/export/exec1st.sh
-if [ ! -f $EXEC1ST ];then
-    wget $URL/exec1st.sh -O $EXEC1ST
-fi
-if [ ! -x $EXEC1ST ];then
-    chmod +x $EXEC1ST
-fi
-$EXEC1ST
+EXPORT=/root/export
+DOWNLOADS="exec1st.sh startXMail.sh crontab.txt domainadd.sh useradd.sh changepassword.sh"
+for FILE in $DOWNLOADS
+do
+    DONE=$EXPORT/$FILE
+    if [ ! -f $DONE ];then
+        wget $URL/$FILE -O $DONE
+    fi
+    if [ ! -x $DONE ];then
+        chmod +x $DONE
+    fi
+done
+
+$EXPORT/exec1st.sh
+crontab $EXPORT/crontab.txt
 /etc/init.d/crond start
 /usr/bin/tail -f /dev/null
 
