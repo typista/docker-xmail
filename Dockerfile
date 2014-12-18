@@ -2,13 +2,8 @@
 FROM typista/base
 #FROM typista/base:0.4
 RUN wget https://raw.githubusercontent.com/typista/docker-xmail/master/files/exec1st.sh -O /root/exec1st.sh && \
-	wget https://raw.githubusercontent.com/typista/docker-xmail/master/files/startXMail.sh -O /root/startXMail.sh && \
-	wget https://raw.githubusercontent.com/typista/docker-xmail/master/files/crontab.txt -O /root/crontab.txt && \
-	wget https://raw.githubusercontent.com/typista/docker-xmail/master/files/domainadd.sh -O /root/domainadd.sh && \
-	wget https://raw.githubusercontent.com/typista/docker-xmail/master/files/useradd.sh -O /root/useradd.sh && \
-	wget https://raw.githubusercontent.com/typista/docker-xmail/master/files/changepassword.sh -O /root/changepassword.sh && \
-	wget https://raw.githubusercontent.com/typista/docker-xmail/master/files/services.sh -O /etc/services.sh && \
-	chmod +x /etc/services.sh && \
+	wget https://raw.githubusercontent.com/typista/docker-xmail/master/files/entrypoint.sh -O /etc/entrypoint.sh && \
+	chmod +x /etc/entrypoint.sh && \
 	yum update -y && \
 	wget http://www.xmailserver.org/xmail-1.27.tar.gz && \
 	tar xvzf xmail-1.27.tar.gz && \
@@ -23,5 +18,5 @@ RUN wget https://raw.githubusercontent.com/typista/docker-xmail/master/files/exe
 	chmod 700 /var/MailRoot/
 
 #VOLUME /root/export
-#ENTRYPOINT /etc/services.sh
+#ENTRYPOINT /etc/entrypoint.sh
 
