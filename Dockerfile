@@ -1,7 +1,7 @@
 #http://qiita.com/hnakamur/items/0b72590136cece29faee
 FROM typista/base
 #FROM typista/base:0.4
-RUN wget https://raw.githubusercontent.com/typista/docker-xmail/master/files/execme1st.sh -O /root/execme1st.sh && \
+RUN wget https://raw.githubusercontent.com/typista/docker-xmail/master/files/exec1st.sh -O /root/exec1st.sh && \
 	wget https://raw.githubusercontent.com/typista/docker-xmail/master/files/startXMail.sh -O /root/startXMail.sh && \
 	wget https://raw.githubusercontent.com/typista/docker-xmail/master/files/crontab.txt -O /root/crontab.txt && \
 	wget https://raw.githubusercontent.com/typista/docker-xmail/master/files/domainadd.sh -O /root/domainadd.sh && \
