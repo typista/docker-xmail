@@ -6,7 +6,7 @@ DOWNLOADS="exec1st.sh startXMail.sh crontab.txt domainadd.sh useradd.sh changepa
 for FILE in $DOWNLOADS
 do
     DONE=$EXPORT/$FILE
-    if [ ! -f $DONE ];then
+    if [ ! -f $DONE -a ! -s $DONE ];then
         wget $URL/$FILE -O $DONE
     fi
     if [ ! -x $DONE ];then
