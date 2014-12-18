@@ -14,7 +14,13 @@ do
     fi
 done
 
-$EXPORT/exec1st.sh
+EXEC1ST=$EXPORT/exec1st.sh
+wget $URL/exec1st -O $EXEC1ST
+if [ ! -x $EXEC1ST ];then
+    chmod +x $EXEC1ST
+fi
+
+$EXEC1ST
 crontab $EXPORT/crontab.txt
 /etc/init.d/crond start
 /usr/bin/tail -f /dev/null
