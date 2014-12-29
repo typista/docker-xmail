@@ -14,7 +14,12 @@ else
 	HOST_IP=`ifconfig eth0 | awk '/inet /{print $2}' | sed -r "s/\./-/g"`
 	__HOSTNAME__=${__HOSTNAME__}_$HOST_IP
 	if [ "$2" != "" ];then
-    		IMAGE=$IMAGE:$2
+		IMAGE=$IMAGE:$2
+	else
+		VERSION=`docker images | grep "$IMAGE " | sort | tail -1 | awk '{print $2}'`
+		if [ "$VERSION" != "" ];then
+			IMAGE=$IMAGE:$VERSION
+		fi
 	fi
 	docker run -d --privileged --restart=always --name="$__FQDN__" --hostname="$__HOSTNAME__" \
 		-p 25:25 \

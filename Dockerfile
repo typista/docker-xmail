@@ -1,6 +1,6 @@
 #http://qiita.com/hnakamur/items/0b72590136cece29faee
 FROM typista/base
-#FROM typista/base:0.4
+#FROM typista/base:0.5
 RUN wget https://raw.githubusercontent.com/typista/docker-xmail/master/files/entrypoint.sh -O /etc/entrypoint.sh && \
 	chmod +x /etc/entrypoint.sh && \
 	yum update -y && \
@@ -15,7 +15,4 @@ RUN wget https://raw.githubusercontent.com/typista/docker-xmail/master/files/ent
 	ln -s /var/MailRoot/sendmail.sh /usr/sbin/sendmail && \
 	ls bin/ | grep -v ".o" | xargs -I{} cp bin/{} /var/MailRoot/bin/ && \
 	chmod 700 /var/MailRoot/
-
-#VOLUME /root/export
-#ENTRYPOINT /etc/entrypoint.sh
 
