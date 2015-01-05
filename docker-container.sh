@@ -37,15 +37,15 @@ else
 		mkdir -p $DIR_CONTAINER
 	fi
 
-    BOOT=./container/docker-boot-$CONTAINER.sh
-    BOOT_OFF=./container/docker-boot-off-$CONTAINER.sh
-    REMOVE=./container/docker-remove-$CONTAINER.sh
-    echo "./docker-boot.sh $__FQDN__" > $BOOT
-    echo "./docker-boot-off.sh $__FQDN__" > $BOOT_OFF
-    echo "docker rm -f $__FQDN__" > $REMOVE
-    echo "sudo rm -rf /var/www/$CONTAINER" >> $REMOVE
-    chmod +x $BOOT
-    chmod +x $BOOT_OFF
-    chmod +x $REMOVE
-    $BOOT
+	BOOT=./container/docker-boot-$CONTAINER.sh
+	BOOT_OFF=./container/docker-boot-off-$CONTAINER.sh
+	REMOVE=./container/docker-remove-$CONTAINER.sh
+	echo "./docker-boot.sh $__FQDN__" > $BOOT
+	echo "./docker-boot-off.sh $__FQDN__" > $BOOT_OFF
+	echo "docker rm -f $__FQDN__" > $REMOVE
+	echo "sudo rm -rf /var/www/$CONTAINER" >> $REMOVE
+	chmod +x $BOOT
+	chmod +x $BOOT_OFF
+	chmod +x $REMOVE
+	$BOOT
 fi
