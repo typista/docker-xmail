@@ -37,6 +37,12 @@ else
 		mkdir -p $DIR_CONTAINER
 	fi
 
+	RESTART=./restart.sh
+	touch $RESTART
+	echo "docker rm -f $__FQDN__" >> $RESTART
+	echo "$0 $__FQDN__" >> $RESTART
+	chmod +x $RESTART
+
 	BOOT=./container/docker-boot-$CONTAINER.sh
 	BOOT_OFF=./container/docker-boot-off-$CONTAINER.sh
 	REMOVE=./container/docker-remove-$CONTAINER.sh
