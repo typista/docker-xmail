@@ -8,7 +8,6 @@ RUN wget https://raw.githubusercontent.com/typista/docker-xmail/master/files/ent
 	tar xvzf xmail-1.27.tar.gz && \
 	cd xmail-1.27;make -f Makefile.lnx && \
 	cp -r MailRoot /var/ && \
-	cp xmail /etc/init.d/ && \
 	cp sendmail.sh /var/MailRoot/ && \
 	chmod +x /var/MailRoot/sendmail.sh && \
 	mv /usr/sbin/sendmail{,.org} && \

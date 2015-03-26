@@ -2,7 +2,7 @@
 REPO=docker-xmail
 URL=https://raw.githubusercontent.com/typista/$REPO/master/files
 EXPORT=/root/export
-DOWNLOADS="exec1st.sh startXMail.sh crontab.txt domainadd.sh useradd.sh changepassword.sh"
+DOWNLOADS="exec1st.sh startXMail.sh crontab.txt domainadd.sh useradd.sh changepassword.sh xmail"
 for FILE in $DOWNLOADS
 do
     DONE=$EXPORT/$FILE

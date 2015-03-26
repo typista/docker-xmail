@@ -3,6 +3,7 @@ if [ "$2" = "" ];then
 	echo "Please enter MASTER_DOMAIN and SUB_DOMAIN [and SSL_SELF_SIGNED]"
 	exit
 fi
+cp /export/xmail /etc/init.d/
 XMAIL=/var/MailRoot
 if [ ! -L $XMAIL ];then
 	if [ ! -d ~/export/MailRoot ];then
