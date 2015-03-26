@@ -1,2 +1,4 @@
 container
 /dst/ssl/*
+/export/*
+restart.sh
